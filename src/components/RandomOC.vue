@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <el-col :span="15">
     <p>
       <span>遇见你命定的角色</span>
@@ -29,7 +29,7 @@ export default {
   },
   methods: {
       read(addr){
-        this.$http.get("http://381407nv99.zicp.vip/"+addr+".txt", { credentials: true }).then((response) => {
+        this.$http.get("http://121.4.151.34/"+addr+".txt", { credentials: true }).then((response) => {
           this.content = response.body;
           this.contents = this.content.split(/\r\n/);
           this.contents_colle.set(addr, this.contents)
