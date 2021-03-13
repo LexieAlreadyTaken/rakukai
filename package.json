@@ -9,7 +9,9 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "dns": "^0.2.2",
     "element-ui": "^2.15.1",
+    "module": "^1.2.5",
     "mongodb": "^3.6.4",
     "vue": "^2.6.11",
     "vue-resource": "^1.5.2",
