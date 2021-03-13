@@ -1,81 +1,86 @@
 <template>
-  <div class="outcont">
-    <header class="top">
-      <img src="../../public/rakukai.png" class="toppic"/>
-      <h1>欢迎来到乐谐世界！——🎈🎈🎈</h1>
-    </header>
-    <ul class="navlist">
-      <li v-for="menuitem in menulist" :key="menuitem.name">
-        <a :href="menuitem.refer">{{menuitem.name}}</a>
-      </li>
-    </ul>
-    <router-view></router-view>
-  </div>
+  <el-container>
+    <el-header class="theheader">
+      <el-image :src="headerurl" fit="scale-down" style="padding-left: 5px; height: 60px; width: 60px;"/>
+      <span class="welcome">{{welcome}}</span>
+    </el-header>
+    <el-menu mode="horizontal" :default-active="active" @select="handleSelect"
+      active-text-color="#9A1A0C" style="font-size:1rem;"><!--不知为什么字体大小不起作用-->
+      <el-menu-item v-for="menu in menulist" :index="menu.index" :key="menu.index">
+        <span>{{menu.name}}</span>
+      </el-menu-item>
+    </el-menu>
+    <el-main>
+      <know-rak v-if="active=='1'"></know-rak>
+      <gen-tool v-if="active=='2'"></gen-tool>
+      <footprint v-if="active=='3'"></footprint>
+    </el-main>
+    <el-footer class="footer">
+本站由绚花理绪、天河骠骑、冖灬竻等粉丝的投喂赞助开放！<span class="original">第一个投喂的时候用直播姬不熟练，没记住是谁</span>
+    </el-footer>
+  </el-container>
 </template>
 
 <script>
+import KnowRak from "./KnowRak.vue"
+import GenTool from "./GenTool.vue"
+import Footprint from "./Footprint.vue"
 export default {
   name: 'HomePage',
+  components:{
+    KnowRak, GenTool, Footprint
+  },
   props: {
   },
-  data:()=>({
-    menulist:[
-      {
-        name: "了解乐谐",
-        refer: ""
-      },
-      {
-        name: "生成器工具箱",
-        refer: ""
+  data(){
+    return{
+      headerurl:require("../../public/rakukai2.png"),
+      welcome:"欢迎来到乐谐世界！——🎈🎈🎈",
+      active: '1',
+      menulist:[
+        {
+          name: "了解乐谐",
+          index: "1"
+        },
+        {
+          name: "生成器工具箱",
+          index: "2"
+        },
+        {
+          name: "留下足迹",
+          index: "3"
+        }
+      ]
+    }
+  },
+    methods: {
+      handleSelect(key) {
+        this.active = key;
       }
-    ]
-  })
+    }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .outcont{
-    background-color:#ff6257;
-    width:100vw;
-    height:100vh;
-    margin: 0;
-    border: 0;
+  .welcome{
+    padding:20px;
+    font-size: 25px;
   }
-  header{
-    background-color: #c02014;
-  }
-  header h1{
-    display: inline;
-    color: #4a996d;
-    font-weight: inherit;
-    margin: 0;
-    padding-left: 20px;
-  }
-  .toppic{
-    width:100px;
-    height:100px;
-  }
-  .navlist{
+  .theheader{
+    background-color:rgb(168, 12, 12);
     display: flex;
     width: 100vw;
-    background-color:#8c1006;
-    list-style-type: none;
-    white-space: nowrap;
-    overflow: hidden;
-    padding: 0;
-    margin: 0;
+    color: #cad6c7;
   }
-  .navlist li{
-    background-color:#8c1006;
+  .footer{
+    padding-top: 10px;
     text-align: center;
-    padding: 3px;
-    margin-left:20px;
-    overflow: hidden;
+    font-size: 0.8rem;
+    background: #d6cac7;
   }
-  .navlist li a{
-    display: block;
-    color: white;
-    text-decoration: none;
+  .original{
+      font-size: 0.8rem;
+      color: rgb(133, 163, 130);
   }
 </style>
