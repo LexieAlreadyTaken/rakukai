@@ -3,27 +3,38 @@
     数据库建好了！欢迎在这里写下对我的留言，我会参考的！
     <p>
       <span>随便写写：</span><el-input v-model="message" placeholder="来都来了……"></el-input>
-      <span>您的昵称：</span><el-input v-model="nickname"></el-input><!-- placeholder="否则是随机昵称！"-->
-      <el-button @click="handleClick">提交留言</el-button>
+      <span>您的昵称：</span><el-input v-model="nickname" placeholder="不写也可以"></el-input>
+      <el-button @click="handleClick" style="background-color:#dd7777">提交留言</el-button>
     </p>
+    <DisplayCard v-for="comment in comments" :key="comment._id" :message="comment.message"
+      :nickname="comment.nickname" :ip="comment.ip"></DisplayCard>
   </el-row>
 </template>
 
 <script>
 import axios from 'axios'
+import DisplayCard from './DisplayCard.vue'
 export default {
   name: 'Footprint',
   components:{
+    DisplayCard
   },
   props: {
   },
   data(){
     return{
       message: "",
-      nickname:""
+      nickname:"",
+      comments:[]
     }
   },
   mounted(){
+    axios({
+      method:'post',
+      url:'http://121.4.151.34:3000/getmessages'
+    }).then(response =>{
+      this.comments = response.data.reverse();
+    })
     /*const mongoose = require("mongoose");
     console.log(mongoose);*/
   },
@@ -55,7 +66,7 @@ export default {
         method:'post',
         url:'http://121.4.151.34:3000/getmessages'
       }).then(response =>{
-        console.log(response.data);
+        this.comments = response.data.reverse();
       })
     }
   }
