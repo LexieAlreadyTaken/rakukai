@@ -1,11 +1,16 @@
 <template>
   <el-row>
-    数据库还没有建好，不过可以加我的粉丝群表示支持？
-    <el-button @click="handleClick">一个测试按钮，可以点点看。</el-button>
+    数据库建好了！欢迎在这里写下对我的留言，我会参考的！
+    <p>
+      <span>随便写写：</span><el-input v-model="message" placeholder="来都来了……"></el-input>
+      <span>您的昵称：</span><el-input v-model="nickname"></el-input><!-- placeholder="否则是随机昵称！"-->
+      <el-button @click="handleClick">提交留言</el-button>
+    </p>
   </el-row>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'Footprint',
   components:{
@@ -14,25 +19,43 @@ export default {
   },
   data(){
     return{
-      MongoClient : null,
-      url: 'mongodb://localhost:27017/raku'
+      message: "",
+      nickname:""
     }
   },
   mounted(){
+    /*const mongoose = require("mongoose");
+    console.log(mongoose);*/
   },
   methods: {
-    handleClick(event){
-      console.log(event);
-      this.MongoClient = require('mongodb').MongoClient;
-      this.MongoClient.connect(this.url, function(err, db){
-        if(err) throw err;
-        var dbo = db.db("raku");
-        var myobj = { name: "", time:new Date()};
-        dbo.collection("visitor").insertOne(myobj, function(err,res){
-          if(err) throw err;
-          console.log(res);
-          db.close();
-        })
+    handleClick(){
+      /*console.log(this.message);
+      var xhr = new XMLHttpRequest();
+      xhr.open('post','http://121.4.151.34:3000/test',true);
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-unlencoded; charset=UTF-8');
+      xhr.send("message="+this.message);
+      var data = Qs.stringify({"message": this.message});
+      this.$http.post('http://121.4.151.34:3000/test',data,{
+        headers:{
+          'Content-Type': 'application/x-www-form-unlencoded'
+        }
+      }).then((response)=>{
+        console.log(response);
+      })*/
+      axios({
+        method:'post',
+        url:'http://121.4.151.34:3000/test',
+        data:{
+          "message": this.message,
+          "nickname": this.nickname
+        }
+      })
+      this.message="";
+      axios({
+        method:'post',
+        url:'http://121.4.151.34:3000/getmessages'
+      }).then(response =>{
+        console.log(response.data);
       })
     }
   }
