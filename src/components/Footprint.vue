@@ -7,7 +7,7 @@
       <el-button @click="handleClick" style="background-color:#dd7777">提交留言</el-button>
     </p>
     <DisplayCard v-for="comment in comments" :key="comment._id" :message="comment.message"
-      :nickname="comment.nickname" :ip="comment.ip"></DisplayCard>
+      :nickname="comment.nickname" :ip="comment.ip" :time="comment.time"></DisplayCard>
   </el-row>
 </template>
 

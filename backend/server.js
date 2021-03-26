@@ -39,7 +39,7 @@ app.post('/test',function(req, res){
                 message: req.body.message,
                 nickname: req.body.nickname,
                 ip: req.ip,
-                time: String(new Date())
+                time: new Date().toLocaleString()
             });
           visitor.save((err, visitor)=>{
             if(err) return console.log(err);

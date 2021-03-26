@@ -1,7 +1,7 @@
 <template>
   <el-card :style="{background:randomColor}">
     <span>{{message}}</span>
-    <span class="nickname">——{{nickname?nickname:randomName}}</span>
+    <span class="nickname">——{{nickname?nickname:randomName}} {{time}}</span>
   </el-card>
 </template>
 
@@ -13,7 +13,8 @@ export default {
   props: {
     message: String,
     nickname: String,
-    ip: String
+    ip: String,
+    time: String
   },
   data(){
     return {

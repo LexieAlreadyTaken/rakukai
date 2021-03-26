@@ -16,7 +16,8 @@
       <footprint v-if="active=='3'"></footprint>
     </el-main>
     <el-footer class="footer">
-本站由绚花理绪、天河骠骑、冖灬竻等粉丝的投喂赞助开放！<span class="original">第一个投喂的时候用直播姬不熟练，没记住是谁</span>
+本站由绚花理绪、天河骠骑、冖灬竻、成蹊cxxx等粉丝的投喂赞助开放！<span class="original">第一个投喂的时候用直播姬不熟练，没记住是谁</span>
+<br>友情链接：<a href="http://www.anjproject.com">AnJProject</a>    
     </el-footer>
   </el-container>
 </template>
